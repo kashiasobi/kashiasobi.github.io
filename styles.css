@@ -369,12 +369,23 @@ body.dark-mode .sidebar ul li:hover a {
     background-color: white;
     color: #f2285a;
     text-decoration: none;
-    text-align: center;
+    text-align: left;
 }
 
 body.dark-mode .sidebarButton {
     background-color: #333;
     color: #f2285a;
     text-decoration: none;
-    text-align: center;
+    text-align: left;
+}
+
+.sideTitle {
+    font-size:18px;
+    font-weight:bold;
+    color: #f2285a;
+}
+.sideTitle_otherlangs {
+    font-size: 12px;
+    font-weight:bold;
+    color: #f2285a;
 }
