@@ -383,9 +383,11 @@ body.dark-mode .sidebarButton {
     font-size:18px;
     font-weight:bold;
     color: #f2285a;
+    text-align: left;
 }
 .sideTitle_otherlangs {
     font-size: 12px;
     font-weight:bold;
     color: #f2285a;
+    text-align: left;
 }
