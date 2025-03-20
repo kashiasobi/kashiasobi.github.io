@@ -15,15 +15,30 @@
 
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="openSidebar()">
         <div id="sidebar" class="sidebar">
-            <ul>
+            <!-- <ul>
                 <li><a class="sidebarButton" href="/">홈</a></li>
                 <hr/>
-                <li><a class="sidebarButton" href="#">서비스</a></li>
+                <li><a class="sidebarButton" href="#">
+                    <div class="sideTitle">밤을 달리다</div>
+                </a></li>
                 <li><a class="sidebarButton" href="#">포트폴리오</a></li>
                 <li><a class="sidebarButton" href="#">연락처</a></li>
-            </ul>
+            </ul> -->
         </div>
     </div>
+    <script>
+        fetch('/sidebar.html')  // 불러올 파일 (같은 서버 내에 있어야 함)
+            .then(response => {
+                    if (!response.ok) {
+                        throw new Error('네트워크 응답이 올바르지 않습니다.');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById('sidebar').innerHTML = data;
+                })
+                .catch(error => console.error('파일을 불러오는 중 오류 발생:', error));
+    </script>
 
 
 
