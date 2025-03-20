@@ -1,0 +1,326 @@
+.floating-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #ff6087;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.floating-btn:hover {
+    background-color: #f2285a;
+    transform: scale(1.1);
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background: white;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.close-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #f2285a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    background: #ff6087;
+}
+
+.toggle-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+}
+
+
+
+.toggleSwitch {
+    width: 30px;
+    height: 15px;
+    display: block;
+    position: relative;
+    border-radius: 9px;
+    background-color: #fff;
+    box-shadow: 0 0 16px 3px rgba(0 0 0 / 15%);
+    cursor: pointer;
+    margin: 9px;
+}
+
+.toggleSwitch .toggleButton {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: #f2285a;
+}
+
+.toggle:checked ~ .toggleSwitch {
+    background: #f2285a;
+}
+
+.toggle:checked ~ .toggleSwitch .toggleButton {
+    left: calc(100% - 13px);
+    background: #fff;
+}
+
+.toggleSwitch, .toggleButton {
+    transition: all 0.2s ease-in;
+}
+
+
+#toggleDarkmode:checked ~ .toggleSwitch {
+    background: #dea229;
+}
+
+#toggleDarkmode:checked ~ .toggleSwitch .toggleButton {
+    left: calc(100% - 13px);
+    background: #fff;
+}
+
+
+.shadow-box {
+    background-color: #ffffff;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); /* 그림자 효과 */
+    transition: box-shadow 0.3s ease-in-out; /* 마우스를 올렸을 때 그림자가 커지도록 */
+}
+.shadow-box:hover {
+    background-color: #f0f0f0;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+body.dark-mode .modal {
+    background-color: #121212;
+    color: white;
+}
+body.dark-mode .toggleSwitch{
+    background-color: #7e7e7e;
+}
+body.dark-mode .shadow-box{
+    background-color: #121212;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); /* 그림자 효과 */
+    transition: box-shadow 0.3s ease-in-out; /* 마우스를 올렸을 때 그림자가 커지도록 */
+}
+body.dark-mode .shadow-box:hover{
+    background-color: #7e7e7e;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.4);
+}
+
+.original {
+    font-size: 24px;
+    font-style:oblique;
+    transition: background-color 0.3s ease;
+}
+.hatsuon {
+    font-size: 22;
+    transition: background-color 0.3s ease;
+}
+.translation {
+    font-size: 16;
+    transition: background-color 0.3s ease;
+}
+.isshoni-utatte {
+    transition: background-color 0.3s ease;
+}
+.isshoni-utatte.sing {
+    color: #ff6087;
+}
+.kashicontainer {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.kashicontainer.show {
+    max-height: 500px;
+    opacity: 1;
+}
+
+
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #222;
+    color: white;
+    padding: 20px 20px 20px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* 로고 */
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 70px;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250;
+    width: 250px;
+    height: 100%;
+    background: #fff;
+    color: #000;
+    transition: left 1s ease-in-out;
+    padding-top: 60px;
+}
+body.dark-mode .sidebar {
+    background-color: #333;
+    color: white;
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    text-align: center;
+}
+
+.sidebar ul li a {
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+body.dark-mode .sidebar ul li a {
+    color: white;
+}
+
+.sidebar ul li:hover {
+    background: #ccc;
+}
+body.dark-mode .sidebar ul li:hover {
+    background: #555;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+.sidebar.active {
+    left: 0;
+}
+.open-btn {
+    position: fixed;
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 22px;
+}
+
+.open-btn:hover {
+    background: #555;
+}
+
+.information {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.songtitle {
+    font-size: 36px;
+}
+
+.youtube {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.buttonContainer {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.a-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    color: white;
+    background-color: #ff6087;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.a-button:hover {
+    background-color: #f2285a;
+}

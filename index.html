@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KashiASOBI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <button id="openBtn" class="open-btn" onclick="openSidebar()">☰</button>
+        <div class="logo">🎵 KashiASOBI</div>
+    </header>
+
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="openSidebar()">
+        <div id="sidebar" class="sidebar">
+            <ul>
+                <li><a href="#">홈</a></li>
+                <hr/>
+                <li><a href="#">서비스</a></li>
+                <li><a href="#">포트폴리오</a></li>
+                <li><a href="#">연락처</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div style="height:150px;"> </div>
+    <div class="information">
+        <div class="songtitle">PLAYERS</div>
+        <div class="songtitletranslation" hidden>PLAYERS</div>
+        <br/>
+        <div class="releaseDate">발매일 : 2025. 03. 21. </div>
+        <div class="songinfo">Playstation 30주년 기념 콜라보곡</div>
+    </div>
+    <div style="height:5px;"> </div>
+    <div class="buttonContainer">
+        <a class="a-button" href="https://www.yoasobi-music.jp/projectmemorycard/" target="_blank">원작 보기</a>
+        <a class="a-button" href="https://monoasobi.vercel.app/30" target="_blank">원작 번역</a>
+    </div>
+    <div style="height:10px;"> </div>
+
+
+
+
+
+
+    <div class="youtube">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/DFvvfK9WfJM?si=Tpbw6cYHMk0B7eue" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    
+
+    <div class="shadow-box">
+        <div class="original kashicontainer show"><d class="isshoni-utatte">Play on, you and me,</d> set on the legacy</div>
+    </div>
+    <div class="shadow-box">
+        <div class="original kashicontainer show isshoni-utatte">Play on, you and me, set on the legacy</div>
+    </div>
+    <div class="shadow-box">
+        <div class="original kashicontainer show">起動した今日に紡いだ</div>
+        <div class="hatsuon kashicontainer show">키도오시타 쿄오니 츠무이다</div>
+        <div class="translation kashicontainer show">기동한 오늘로 시작한 이야기다</div>
+    </div>
+    <div class="shadow-box">
+        <div class="original kashicontainer show">いつからかわかりきった毎日を</div>
+        <div class="hatsuon kashicontainer show">이츠카카라 카와카리킷타 마이니치오</div>
+        <div class="translation kashicontainer show">언제부턴가 뻔해져버린 매일을</div>
+    </div>
+    <div class="shadow-box">
+        <div class="original kashicontainer show">こなしている</div>
+        <div class="hatsuon kashicontainer show">코나시테이루</div>
+        <div class="translation kashicontainer show">흘려보내고있어</div>
+    </div>
+    <div class="shadow-box">
+        <div class="original kashicontainer show">はじめからなんてできない</div>
+        <div class="hatsuon kashicontainer show">하지메카라난테 데키나이</div>
+        <div class="translation kashicontainer show">처음부터 다시 할 수는 없어</div>
+    </div>
+    <div class="shadow-box">
+        <div class="original kashicontainer show">記憶の奥染み付いた</div>
+        <div class="hatsuon kashicontainer show">키오쿠노 오쿠 시미츠이타</div>
+        <div class="translation kashicontainer show">기억 속 깊이 스며들어있는</div>
+    </div>
+    
+    
+    <button class="floating-btn" onclick="openModal()">+</button>
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h2>설정</h2>
+            
+            <p class="toggle-container">
+                가사 원문 숨기기 
+                <input type="checkbox" class="toggle" id="toggleoriginal" hidden> 
+
+                <label for="toggleoriginal" class="toggleSwitch">
+                  <span class="toggleButton"></span>
+                </label>
+            </p>
+            <p class="toggle-container">
+                가사 발음 숨기기 
+                <input type="checkbox" class="toggle" id="togglehatsuon" hidden> 
+
+                <label for="togglehatsuon" class="toggleSwitch">
+                  <span class="toggleButton"></span>
+                </label>
+            </p>
+            <p class="toggle-container">
+                가사 번역 숨기기 
+                <input type="checkbox" class="toggle" id="toggletranslation" hidden> 
+
+                <label for="toggletranslation" class="toggleSwitch">
+                  <span class="toggleButton"></span>
+                </label>
+            </p>
+            <p class="toggle-container">
+                함께 부르는 가사 표시하기
+                <input type="checkbox" class="toggle" id="toggleisshoniutatte" hidden> 
+
+                <label for="toggleisshoniutatte" class="toggleSwitch">
+                  <span class="toggleButton"></span>
+                </label>
+            </p>
+
+            <p class="toggle-container">
+                다크모드
+                <input type="checkbox" id="toggleDarkmode" hidden> 
+
+                <label for="toggleDarkmode" class="toggleSwitch">
+                  <span class="toggleButton"></span>
+                </label>
+            </p>
+
+            <button class="close-btn" onclick="closeModal()">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleOriginallyrics() {
+            let elements = document.getElementsByClassName("original"); 
+            for (let element of elements) {
+                if (element.classList.contains("show")) {
+                    element.classList.remove("show");
+                } else {
+                    element.classList.add("show");
+                }
+            }
+        }
+        function toggleHatsuonlyrics() {
+            let elements = document.getElementsByClassName("hatsuon"); 
+            for (let element of elements) {
+                if (element.classList.contains("show")) {
+                    element.classList.remove("show");
+                } else {
+                    element.classList.add("show");
+                }
+            }
+        }
+        function toggleTranslationlyrics() {
+            let elements = document.getElementsByClassName("translation"); 
+            for (let element of elements) {
+                if (element.classList.contains("show")) {
+                    element.classList.remove("show");
+                } else {
+                    element.classList.add("show");
+                }
+            }
+        }
+        function toggleIsshoniUtattelyrics() {
+            let elements = document.getElementsByClassName("isshoni-utatte"); 
+            for (let element of elements) {
+                if (element.classList.contains("sing")) {
+                    element.classList.remove("sing");
+                } else {
+                    element.classList.add("sing");
+                }
+            }
+        }
+
+        function toggleDarkmode() {
+            // body 태그에 dark-mode 클래스를 토글
+            document.body.classList.toggle('dark-mode');
+            //document.div.classList.toggle('dark-mode');
+        }
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // 토글 ID 및 해당 함수 매핑
+            const toggleActions = {
+                "toggleoriginal": toggleOriginallyrics,
+                "togglehatsuon": toggleHatsuonlyrics,
+                "toggletranslation": toggleTranslationlyrics,
+                "toggleisshoniutatte": toggleIsshoniUtattelyrics,
+                "toggleDarkmode": toggleDarkmode
+            };
+
+            // 토글 상태 적용 및 실행
+            Object.keys(toggleActions).forEach(id => {
+                const toggle = document.getElementById(id);
+                const savedState = localStorage.getItem(id);
+
+                if (savedState === "true") {
+                    toggle.checked = true;
+                    toggleActions[id]();  // 저장된 상태가 true면 해당 함수 실행
+                }
+
+                // 변경 감지 및 저장
+                toggle.addEventListener("change", function () {
+                    localStorage.setItem(id, this.checked);
+                    toggleActions[id]();  // 토글이 변경될 때도 함수 실행
+                });
+            });
+        });
+
+        function toggleMenu() {
+            document.querySelector(".nav-links").classList.toggle("active");
+        }
+
+        function openModal() {
+            document.getElementById("modalOverlay").style.display = "flex";
+        }
+        function closeModal() {
+            document.getElementById("modalOverlay").style.display = "none";
+        }
+        document.getElementById("modalOverlay").addEventListener("click", function(event) {
+            if (event.target === this) {
+                closeModal();
+            }
+        });
+
+        function openSidebar(){
+            element = document.getElementById("sidebar");
+            if (element.classList.contains("active")) {
+                element.classList.remove("active");
+                document.getElementById("sidebarOverlay").style.display = "none";
+            } else {
+                element.classList.add("active");
+                document.getElementById("sidebarOverlay").style.display = "flex";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebar = document.getElementById("sidebar");
+
+            // 터치 이벤트를 감지하여 스와이프 기능 추가
+            let startX = 0;
+
+            document.addEventListener("touchstart", function (event) {
+                startX = event.touches[0].clientX;
+            });
+
+            document.addEventListener("touchmove", function (event) {
+                let endX = event.touches[0].clientX;
+                let diffX = endX - startX;
+
+                if (diffX > 100) { // 오른쪽으로 스와이프하면 열림
+                    sidebar.classList.add("active");
+                } else if (diffX < -100) { // 왼쪽으로 스와이프하면 닫힘
+                    sidebar.classList.remove("active");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
