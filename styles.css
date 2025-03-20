@@ -253,13 +253,6 @@ body.dark-mode .sidebar ul li a {
     color: white;
 }
 
-.sidebar ul li:hover {
-    background: #ccc;
-}
-body.dark-mode .sidebar ul li:hover {
-    background: #555;
-}
-
 .sidebar-overlay {
     display: none;
     position: fixed;
@@ -300,8 +293,19 @@ body.dark-mode .sidebar ul li:hover {
     text-align: center;
     justify-content: center;
     align-items: center;
-
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;  
+    max-width: 560px;
+    margin: auto auto;
 }
+.youtube iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 
 .buttonContainer {
     text-align: center;
@@ -324,4 +328,22 @@ body.dark-mode .sidebar ul li:hover {
 
 .a-button:hover {
     background-color: #f2285a;
+}
+
+.sidebarButton {
+    border-color: #f2285a;
+    border-width: 1px;
+    background-color: white;
+    color: #f2285a;
+    text-decoration: none;
+    text-align: center;
+}
+
+body.dark-mode .sidebarButton {
+    border-color: #f2285a;
+    border-width: 1px;
+    background-color: #333;
+    color: #f2285a;
+    text-decoration: none;
+    text-align: center;
 }
