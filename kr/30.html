@@ -106,9 +106,10 @@
                 })
                 .then(data => {
                     document.getElementById('lyrics-container').innerHTML = data;
+                    toggleIsshoniUtattelyrics()
                 })
                 .catch(error => console.error('파일을 불러오는 중 오류 발생:', error));
-        toggleIsshoniUtattelyrics()
+        
     </script>
     <div class="shadow-box">
         <div class="original kashicontainer show"><d class="isshoni-utatte">Play on, you and me,</d> set on the legacy</div>
