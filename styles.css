@@ -394,3 +394,10 @@ body.dark-mode .sidebarButton {
     color: #f2285a;
     text-align: left;
 }
+
+
+
+.footer {
+    text-align: center;
+    font-size: 12px
+}
