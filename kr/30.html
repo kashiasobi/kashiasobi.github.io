@@ -91,6 +91,23 @@
     </div>
     
 
+    <div id="lyrics-container">
+
+    </div>
+
+    <script>
+        fetch('/kr/players.html')  // 불러올 파일 (같은 서버 내에 있어야 함)
+            .then(response => {
+                    if (!response.ok) {
+                        throw new Error('네트워크 응답이 올바르지 않습니다.');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById('sidebar').innerHTML = data;
+                })
+                .catch(error => console.error('파일을 불러오는 중 오류 발생:', error));
+    </script>
     <div class="shadow-box">
         <div class="original kashicontainer show"><d class="isshoni-utatte">Play on, you and me,</d> set on the legacy</div>
     </div>
