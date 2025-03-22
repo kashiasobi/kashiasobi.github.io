@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./styles.css">
     <script src="/script.js"></script>
 </head>
-<body class="deep-dark-mode">
+<body>
     <header class="navbar">
         <button id="openBtn" class="open-btn" onclick="openSidebar()">☰</button>
         <div class="logo">🎵 KashiASOBI</div>
@@ -140,13 +140,21 @@
 
             <p class="toggle-container">
                 다크모드
-                <input type="checkbox" id="toggleDarkmode" hidden> 
+                <input type="checkbox" id="toggleDarkmode" class="toggleDarkmode" hidden> 
 
                 <label for="toggleDarkmode" class="toggleSwitch">
                   <span class="toggleButton"></span>
                 </label>
             </p>
 
+            <p class="toggle-container">
+                딥-다크모드
+                <input type="checkbox" id="toggleDeepDarkmode" class="toggleDarkmode" hidden> 
+
+                <label for="toggleDeepDarkmode" class="toggleSwitch">
+                  <span class="toggleButton"></span>
+                </label>
+            </p>
             <button class="close-btn" onclick="closeModal()">닫기</button>
         </div>
     </div>
