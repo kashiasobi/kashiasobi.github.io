@@ -46,6 +46,11 @@ function toggleDarkmode() {
     document.body.classList.toggle('dark-mode');
     //document.div.classList.toggle('dark-mode');
 }
+function toggleDeepDarkmode() {
+    // body 태그에 dark-mode 클래스를 토글
+    document.body.classList.toggle('deep-dark-mode');
+    //document.div.classList.toggle('dark-mode');
+}
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -55,7 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "togglehatsuon": toggleHatsuonlyrics,
         "toggletranslation": toggleTranslationlyrics,
         "toggleisshoniutatte": toggleIsshoniUtattelyrics,
-        "toggleDarkmode": toggleDarkmode
+        "toggleDarkmode": toggleDarkmode,
+        "toggleDeepDarkmode": toggleDeepDarkmode
     };
 
     // 토글 상태 적용 및 실행

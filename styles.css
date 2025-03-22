@@ -104,11 +104,11 @@
 }
 
 
-#toggleDarkmode:checked ~ .toggleSwitch {
+.toggleDarkmode:checked ~ .toggleSwitch {
     background: #dea229;
 }
 
-#toggleDarkmode:checked ~ .toggleSwitch .toggleButton {
+.toggleDarkmode:checked ~ .toggleSwitch .toggleButton {
     left: calc(100% - 13px);
     background: #fff;
 }
@@ -140,13 +140,27 @@ body.dark-mode {
     background-color: #121212;
     color: white;
 }
+body.deep-dark-mode {
+    background-color: #000000;
+    color: #333;
+}
+
 body.dark-mode .modal {
     background-color: #121212;
     color: white;
 }
+body.deep-dark-mode .modal {
+    background-color: #000000;
+    color: #333;
+}
+
 body.dark-mode .toggleSwitch{
     background-color: #7e7e7e;
 }
+body.deep-dark-mode .toggleSwitch{
+    background-color: #7e7e7e;
+}
+
 body.dark-mode .shadow-box{
     background-color: #121212;
     margin-left: 50px;
@@ -157,9 +171,24 @@ body.dark-mode .shadow-box{
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); /* 그림자 효과 */
     transition: box-shadow 0.3s ease-in-out; /* 마우스를 올렸을 때 그림자가 커지도록 */
 }
+body.deep-dark-mode .shadow-box{
+    background-color: #000;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); /* 그림자 효과 */
+    transition: box-shadow 0.3s ease-in-out; /* 마우스를 올렸을 때 그림자가 커지도록 */
+}
+
 body.dark-mode .shadow-box:hover{
     background-color: #7e7e7e;
     box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.4);
+}
+body.deep-dark-mode .shadow-box:hover{
+    background-color: #111;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
 }
 
 .original {
@@ -238,6 +267,10 @@ body.dark-mode .sidebar {
     background-color: #333;
     color: white;
 }
+body.deep-dark-mode .sidebar {
+    background-color: #000;
+    color: #333;
+}
 .sidebar ul {
     list-style: none;
     padding: 0;
@@ -257,6 +290,9 @@ body.dark-mode .sidebar {
 body.dark-mode .sidebar ul li:hover {
     background-color: #4b393d;
 }
+body.deep-dark-mode .sidebar ul li:hover {
+    background-color: #160a0d;
+}
 
 
 .sidebar ul li a {
@@ -272,8 +308,14 @@ body.dark-mode .sidebar ul li:hover {
 body.dark-mode .sidebar ul li a {
     color: white;
 }
+body.deep-dark-mode .sidebar ul li a {
+    color: #333;
+}
 body.dark-mode .sidebar ul li:hover a {
     background-color: #4b393d;
+}
+body.deep-dark-mode .sidebar ul li:hover a {
+    background-color: #160a0d;
 }
 
 .sidebar-overlay {
@@ -378,6 +420,12 @@ body.dark-mode .sidebar ul li:hover a {
 body.dark-mode .sidebarButton {
     background-color: #333;
     color: #f2285a;
+    text-decoration: none;
+    text-align: left;
+}
+body.dark-mode .sidebarButton {
+    background-color: #000;
+    color: #510d1e;
     text-decoration: none;
     text-align: left;
 }

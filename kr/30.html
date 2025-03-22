@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KashiASOBI</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <script src="/script.js"></script>
 </head>
-<body>
+<body class="deep-dark-mode">
     <header class="navbar">
         <button id="openBtn" class="open-btn" onclick="openSidebar()">☰</button>
         <div class="logo">🎵 KashiASOBI</div>
@@ -184,9 +184,18 @@
 
             <p class="toggle-container">
                 다크모드
-                <input type="checkbox" id="toggleDarkmode" hidden> 
+                <input type="checkbox" id="toggleDarkmode" class="toggleDarkmode" hidden> 
 
                 <label for="toggleDarkmode" class="toggleSwitch">
+                  <span class="toggleButton"></span>
+                </label>
+            </p>
+
+            <p class="toggle-container">
+                딥-다크모드
+                <input type="checkbox" id="toggleDeepDarkmode" class="toggleDarkmode" hidden> 
+
+                <label for="toggleDeepDarkmode" class="toggleSwitch">
                   <span class="toggleButton"></span>
                 </label>
             </p>
