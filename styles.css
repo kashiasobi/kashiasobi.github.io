@@ -424,19 +424,6 @@ body.deep-dark-mode .sidebar ul li:hover a {
 
 body.dark-mode .sidebarButton {
     background-color: #333;
-    color: #f2285a;
-    text-decoration: none;
-    text-align: left;
-}
-body.deep-dark-mode .sidebarButton {
-    background-color: #000;
-    color: #421e27;
-    text-decoration: none;
-    text-align: left;
-}
-
-body.dark-mode .sidebarButton {
-    background-color: #000;
     color: #510d1e;
     text-decoration: none;
     text-align: left;
