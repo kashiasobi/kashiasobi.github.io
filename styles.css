@@ -211,7 +211,7 @@ body.deep-dark-mode .shadow-box:hover{
     color: #ff6087;
 }
 body.deep-dark-mode .isshoni-utatte.sing {
-    color: #501421;
+    color: #501421 !important;
 }
 .kashicontainer {
     text-align: center;
