@@ -138,6 +138,10 @@ body.deep-dark-mode .floating-btn:hover {
     background-color: #f0f0f0;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 }
+.shadow-box.playing {
+    background-color: #f0f0f0;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
 
 
 body {
