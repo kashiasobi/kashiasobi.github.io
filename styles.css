@@ -416,9 +416,17 @@ body.deep-dark-mode .sidebar ul li:hover a {
     text-decoration: none;
     transition: background-color 0.3s;
 }
+body.deep-dark-mode .a-button {
+    background-color: #501421;
+    color: #333;
+}
 
 .a-button:hover {
     background-color: #f2285a;
+}
+body.deep-dark-mode .a-button:hover {
+    background-color: rgb(35, 4, 14);
+    color: #333;
 }
 /*
 .sidebarButton {
