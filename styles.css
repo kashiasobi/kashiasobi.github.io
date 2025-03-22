@@ -252,6 +252,10 @@ body.deep-dark-mode .sing {
     width: 100%;
     z-index: 100000;
 }
+body.deep-dark-mode .navbar {
+    background: #070707;
+    color: #333;
+}
 
 /* 로고 */
 .logo {
@@ -259,7 +263,6 @@ body.deep-dark-mode .sing {
     font-weight: bold;
     padding-left: 70px;
 }
-
 
 .sidebar {
     position: fixed;
@@ -363,9 +366,18 @@ body.deep-dark-mode .sidebar ul li:hover a {
     border-radius: 5px;
     font-size: 22px;
 }
+body.deep-dark-mode .open-btn{
+    background: #111;
+    color: #333;
+
+}
 
 .open-btn:hover {
     background: #555;
+}
+
+body.deep-dark-mode .open-btn:hover{
+    background: #222;
 }
 
 .information {
