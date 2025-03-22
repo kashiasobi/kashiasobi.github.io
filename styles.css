@@ -429,7 +429,7 @@ body.dark-mode .sidebarButton {
     text-align: left;
 }
 body.deep-dark-mode .sidebarButton {
-    background-color: #000;
+    background-color: #333;
     color: #250e13;
     text-decoration: none;
     text-align: left;
