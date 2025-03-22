@@ -285,7 +285,7 @@ body.deep-dark-mode .sidebar {
     text-align: center;
 }
 body.deep-dark-mode .sidebar ul li {
-    border-color: #421e27;
+    border-color: #501421;
 }
 
 
@@ -454,10 +454,10 @@ body.deep-dark-mode .sidebarButton {
 }
 
 body.deep-dark-mode .sideTitle {
-    color: #250e13;
+    color: #501421;
 }
 body.deep-dark-mode  .sideTitle_otherlangs {
-    color: #250e13;
+    color: #501421;
 }
 
 
