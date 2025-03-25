@@ -92,13 +92,13 @@
         <iframe width="560" height="315" src="https://www.youtube.com/embed/DFvvfK9WfJM?si=Tpbw6cYHMk0B7eue" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
 
-    <div id='player'></div>
+    <div class="youtube" id='player'></div>
     <script src = 'https://www.youtube.com/iframe_api'></script>
     <script>
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                width: '640',
-                height: '360',
+                width: '560',
+                height: '315',
                 videoId: 'DFvvfK9WfJM',
                 playerVars: {'autoplay': 1, 'showinfo': 0, 'rel':0, 'modestbranding':1,'wmode':'transparent', 'autohide':1},
                 events: {'onReady': onPlayerReady,'onStateChange': onPlayerStateChange}
@@ -115,6 +115,7 @@
                 event.target.setPlaybackQuality('hd720');
             }
         }
+        tmp_obj
     </script>
     
 
@@ -156,7 +157,7 @@
                     toggleIsshoniUtattelyrics()
                 })
                 .catch(error => console.error('파일을 불러오는 중 오류 발생:', error));
-        
+        document.getElementById("lyrics-container").innerText = tmp_obj.getCurrentTime();
     </script>
 
 
