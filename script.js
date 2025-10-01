@@ -88,15 +88,16 @@ function toggleMenu() {
 
 function openModal() {
     document.getElementById("modalOverlay").style.display = "flex";
+
+    document.getElementById("modalOverlay").addEventListener("click", function(event) {
+        if (event.target === this) {
+            closeModal();
+        }
+    });
 }
 function closeModal() {
     document.getElementById("modalOverlay").style.display = "none";
 }
-document.getElementById("modalOverlay").addEventListener("click", function(event) {
-    if (event.target === this) {
-        closeModal();
-    }
-});
 
 function openSidebar(){
     element = document.getElementById("sidebar");
