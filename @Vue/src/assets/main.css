@@ -465,7 +465,7 @@ body.deep-dark-mode .highlight {
   text-align: center;
   border-radius: 10px;
   padding: 2px 40px;
-  margin: 0px;
+  margin: 5px 0px;
   transition: box-shadow 0.3s ease-in-out;
 }
 
