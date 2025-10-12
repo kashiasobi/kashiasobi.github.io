@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실시간 음정 분석기 (개선판)</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        #controls {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #recordButton {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s, transform 0.1s;
+            user-select: none; /* 버튼 텍스트 선택 방지 */
+        }
+        
+        #recordButton:active {
+            background-color: #0056b3;
+            transform: scale(0.98);
+        }
+
+        #results {
+            display: flex;
+            gap: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            min-height: 36px;
+        }
+
+        #piano-container {
+            position: relative;
+            height: 180px;
+            /* 너비는 JS로 동적 설정 */
+        }
+
+        #piano {
+            display: flex;
+            position: relative;
+            height: 100%;
+        }
+
+        .key {
+            border: 1px solid #000;
+            box-sizing: border-box;
+        }
+
+        .white {
+            width: 30px;
+            height: 180px;
+            background-color: white;
+            position: absolute; /* 위치 정밀 제어 위해 absolute로 변경 */
+            z-index: 1;
+        }
+
+        .black {
+            width: 20px;
+            height: 110px;
+            background-color: #333;
+            position: absolute;
+            z-index: 2;
+        }
+        
+        #pitch-indicator {
+            position: absolute;
+            top: 0;
+            left: 0; /* JS로 제어 */
+            width: 3px;
+            height: 100%;
+            background-color: rgba(255, 0, 0, 0.7);
+            z-index: 3;
+            transition: left 0.05s linear;
+            display: none; /* 평상시 숨김 */
+            pointer-events: none;
+        }
+
+        .note-label {
+            position: absolute;
+            bottom: 5px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="controls">
+        <button id="recordButton">입력</button>
+    </div>
+
+    <div id="results">
+        <div id="frequencyDisplay">주파수: - Hz</div>
+        <div id="noteDisplay">음계: -</div>
+    </div>
+
+    <div id="piano-container">
+        <div id="piano"></div>
+        <div id="pitch-indicator"></div>
+    </div>
+
+
+    <script>
+        const recordButton = document.getElementById('recordButton');
+        const frequencyDisplay = document.getElementById('frequencyDisplay');
+        const noteDisplay = document.getElementById('noteDisplay');
+        const pianoContainer = document.getElementById('piano-container');
+        const pianoDiv = document.getElementById('piano');
+        const pitchIndicator = document.getElementById('pitch-indicator');
+
+        let audioContext, analyser, mediaStreamSource, animationFrameId;
+
+        const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+        const startOctave = 2;
+        const numOctaves = 5;
+        
+        function createPiano() {
+            pianoDiv.innerHTML = '';
+            const totalWhiteKeys = 7 * numOctaves + 1;
+            const pianoWidth = totalWhiteKeys * 30;
+            pianoContainer.style.width = `${pianoWidth}px`;
+            pianoDiv.style.width = `${pianoWidth}px`;
+
+            let whiteKeyCount = 0;
+            for (let octave = startOctave; octave <= startOctave + numOctaves; octave++) {
+                for (let i = 0; i < 12; i++) {
+                    if (octave === startOctave + numOctaves && i > 0) continue;
+
+                    const noteName = noteNames[i];
+                    if (noteName.includes('#')) {
+                        const key = document.createElement('div');
+                        key.className = 'key black';
+                        key.style.left = `${(whiteKeyCount - 1) * 30 + 20}px`;
+                        pianoDiv.appendChild(key);
+                    } else {
+                        const key = document.createElement('div');
+                        key.className = 'key white';
+                        key.style.left = `${whiteKeyCount * 30}px`;
+                        
+                        if (noteName === 'C') {
+                            const label = document.createElement('div');
+                            label.className = 'note-label';
+                            label.textContent = `C${octave}`;
+                            key.appendChild(label);
+                        }
+                        pianoDiv.appendChild(key);
+                        whiteKeyCount++;
+                    }
+                }
+            }
+        }
+
+        async function setupAudio() {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    analyser = audioContext.createAnalyser();
+                    analyser.fftSize = 8192;
+                    analyser.smoothingTimeConstant = 0.6;
+                    mediaStreamSource = audioContext.createMediaStreamSource(stream);
+                    mediaStreamSource.connect(analyser);
+                } catch (err) {
+                    alert('마이크 접근 권한이 필요합니다. 페이지를 새로고침하고 권한을 허용해주세요.');
+                }
+            } else {
+                alert('이 브라우저는 Web Audio API를 지원하지 않습니다.');
+            }
+        }
+
+        function analyzeFrequency() {
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            analyser.getByteFrequencyData(dataArray);
+
+            const sampleRate = audioContext.sampleRate;
+            const fftSize = analyser.fftSize;
+            
+            const minHz = 80;
+            const maxHz = 4400;
+            const minIndex = Math.round(minHz * fftSize / sampleRate);
+            const maxIndex = Math.round(maxHz * fftSize / sampleRate);
+
+            let maxVal = -1;
+            let dominantBin = -1;
+            for (let i = minIndex; i <= maxIndex; i++) {
+                if (dataArray[i] > maxVal) {
+                    maxVal = dataArray[i];
+                    dominantBin = i;
+                }
+            }
+            
+            const dominantFrequency = dominantBin * sampleRate / fftSize;
+
+            if (maxVal > 10) {
+                frequencyDisplay.textContent = `주파수: ${dominantFrequency.toFixed(2)} Hz`;
+                const noteInfo = frequencyToNote(dominantFrequency);
+                noteDisplay.textContent = `음계: ${noteInfo.noteName}`;// (${noteInfo.cents.toFixed(0)}¢)`;
+                updatePianoIndicator(dominantFrequency);
+                pitchIndicator.style.display = 'block';
+            } else {
+                frequencyDisplay.textContent = '주파수: - Hz';
+                noteDisplay.textContent = '음계: -';
+                pitchIndicator.style.display = 'none';
+            }
+            
+            animationFrameId = requestAnimationFrame(analyzeFrequency);
+        }
+        
+        function frequencyToNote(frequency) {
+            if (frequency === 0) return { noteName: '-', cents: 0 };
+            const noteNum = 12 * (Math.log2(frequency / 440)) + 69;
+            const roundedNoteNum = Math.round(noteNum);
+            const noteName = noteNames[roundedNoteNum % 12] + (Math.floor(roundedNoteNum / 12) - 1);
+            const cents = (noteNum - roundedNoteNum) * 100;
+            return { noteName, cents };
+        }
+
+        function updatePianoIndicator(frequency) {
+            if (frequency <= 0) return;
+
+            const noteNum = 12 * (Math.log2(frequency / 440)) + 69;
+            const startNoteNum = 12 * (startOctave + 1);
+            
+            const relativeSemitones = noteNum - startNoteNum;
+            if (relativeSemitones < 0) {
+                 pitchIndicator.style.left = '0px';
+                 return;
+            }
+
+            const semitoneToWhiteKeyOffset = [0, 0.5, 1, 1.5, 2, 3, 3.5, 4, 4.5, 5, 5.5, 6];
+
+            const octavesFromStart = Math.floor(relativeSemitones / 12);
+            const semitoneInOctave = relativeSemitones % 12;
+
+            const baseSemitone = Math.floor(semitoneInOctave);
+            const cents = semitoneInOctave - baseSemitone;
+
+            const currentPos = (octavesFromStart * 7 + semitoneToWhiteKeyOffset[baseSemitone]) * 30;
+            let nextPos;
+            if (baseSemitone === 11) {
+                nextPos = ((octavesFromStart + 1) * 7) * 30;
+            } else {
+                nextPos = (octavesFromStart * 7 + semitoneToWhiteKeyOffset[baseSemitone + 1]) * 30;
+            }
+            
+            const finalPosition = currentPos + (nextPos - currentPos) * cents;
+
+            pitchIndicator.style.left = `${finalPosition}px`;
+        }
+
+        async function startAnalysis() {
+            if (!audioContext) await setupAudio();
+            if (audioContext?.state === 'suspended') audioContext.resume();
+            if (analyser) animationFrameId = requestAnimationFrame(analyzeFrequency);
+        }
+
+        function stopAnalysis() {
+            cancelAnimationFrame(animationFrameId);
+            pitchIndicator.style.display = 'none';
+            frequencyDisplay.textContent = '주파수: - Hz';
+            noteDisplay.textContent = '음계: -';
+        }
+
+        recordButton.addEventListener('mousedown', startAnalysis);
+        recordButton.addEventListener('mouseup', stopAnalysis);
+        recordButton.addEventListener('mouseleave', stopAnalysis);
+        recordButton.addEventListener('touchstart', (e) => { e.preventDefault(); startAnalysis(); });
+        recordButton.addEventListener('touchend', (e) => { e.preventDefault(); stopAnalysis(); });
+        
+        createPiano();
+    </script>
+</body>
+</html>
