@@ -1,424 +1,882 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aooo 2606 — 테스트 페이지</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aooo 첫 원맨 내한 공연을 위한 팬 이벤트 안내 페이지">
+    <title>Aooo 첫 원맨 내한 이벤트</title>
+    <style>
+        :root {
+            --lime: #d4fd57;
+            --lime-soft: #e4ff8a;
+            --lime-pale: #f1ffc2;
+            --dark: #10140d;
+            --dark-2: #182012;
+            --surface: #fbfff2;
+            --white: #ffffff;
+            --text: #182012;
+            --muted: #536044;
+            --line: rgba(212, 253, 87, 0.32);
+            --shadow: 0 24px 70px rgba(20, 30, 12, 0.16);
+            --radius-lg: 34px;
+            --radius-md: 24px;
+            --radius-sm: 16px;
+        }
 
-    :root {
-      --glass-bg: rgba(255, 255, 255, 0.12);
-      --glass-border: rgba(255, 255, 255, 0.28);
-      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-      --text: #f8fafc;
-      --text-muted: rgba(248, 250, 252, 0.72);
-      --accent: #a78bfa;
-      --accent-2: #34d399;
-      --orbit-speed: 24s;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    html {
-      scroll-behavior: smooth;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family:
-        'Noto Sans KR',
-        -apple-system,
-        BlinkMacSystemFont,
-        system-ui,
-        sans-serif;
-      color: var(--text);
-      background: linear-gradient(
-        145deg,
-        #0f172a 0%,
-        #1e1b4b 35%,
-        #312e81 55%,
-        #134e4a 80%,
-        #0f172a 100%
-      );
-      background-size: 200% 200%;
-      animation: bgShift 18s ease-in-out infinite;
-      overflow-x: hidden;
-    }
+        body {
+            margin: 0;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(212, 253, 87, 0.34), transparent 34rem),
+                linear-gradient(180deg, #11170d 0%, #182012 42rem, var(--surface) 42rem);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    @keyframes bgShift {
-      0%,
-      100% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-    }
+        body::before,
+        body::after {
+            position: fixed;
+            z-index: -1;
+            width: 28rem;
+            height: 28rem;
+            border-radius: 999px;
+            content: "";
+            filter: blur(28px);
+            opacity: 0.5;
+            pointer-events: none;
+        }
 
-    .orbits {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
+        body::before {
+            top: -8rem;
+            right: -6rem;
+            background: rgba(212, 253, 87, 0.36);
+        }
 
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.45;
-      animation: drift var(--dur) ease-in-out infinite alternate;
-    }
+        body::after {
+            bottom: 10rem;
+            left: -12rem;
+            background: rgba(228, 255, 138, 0.42);
+        }
 
-    .orb-1 {
-      width: min(60vw, 420px);
-      height: min(60vw, 420px);
-      background: radial-gradient(circle, #818cf8 0%, transparent 70%);
-      top: -10%;
-      left: -15%;
-      --dur: 14s;
-    }
+        a {
+            color: inherit;
+        }
 
-    .orb-2 {
-      width: min(55vw, 380px);
-      height: min(55vw, 380px);
-      background: radial-gradient(circle, #2dd4bf 0%, transparent 70%);
-      bottom: -5%;
-      right: -12%;
-      --dur: 18s;
-    }
+        .page {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+        }
 
-    .orb-3 {
-      width: min(40vw, 280px);
-      height: min(40vw, 280px);
-      background: radial-gradient(circle, #f472b6 0%, transparent 70%);
-      top: 40%;
-      left: 35%;
-      --dur: 12s;
-    }
+        .hero {
+            min-height: 92vh;
+            padding: 36px 0 72px;
+            color: var(--white);
+            display: grid;
+            align-items: center;
+        }
 
-    @keyframes drift {
-      from {
-        transform: translate(0, 0) scale(1);
-      }
-      to {
-        transform: translate(30px, -40px) scale(1.05);
-      }
-    }
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 80px;
+        }
 
-    .wrap {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: clamp(1.25rem, 4vw, 3rem);
-    }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
 
-    .glass {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      box-shadow:
-        var(--glass-shadow),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    }
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--lime), var(--lime-soft));
+            box-shadow: 0 0 34px rgba(212, 253, 87, 0.38);
+        }
 
-    .card {
-      width: min(100%, 420px);
-      padding: clamp(1.75rem, 5vw, 2.25rem);
-      text-align: center;
-    }
+        .nav-pill {
+            padding: 10px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 999px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            text-decoration: none;
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.07);
+            transition: transform 180ms ease, border-color 180ms ease, color 180ms ease;
+        }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.35rem 0.85rem;
-      margin-bottom: 1.25rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent-2);
-      background: rgba(52, 211, 153, 0.15);
-      border: 1px solid rgba(52, 211, 153, 0.35);
-      border-radius: 999px;
-    }
+        .nav-pill:hover,
+        .nav-pill:focus-visible {
+            color: var(--white);
+            border-color: rgba(212, 253, 87, 0.7);
+            transform: translateY(-2px);
+        }
 
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent-2);
-      box-shadow: 0 0 10px var(--accent-2);
-      animation: pulse 2s ease-in-out infinite;
-    }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+            gap: 48px;
+            align-items: center;
+        }
 
-    @keyframes pulse {
-      50% {
-        opacity: 0.5;
-        transform: scale(1.2);
-      }
-    }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: fit-content;
+            margin: 0 0 20px;
+            padding: 8px 14px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--lime-pale);
+            font-size: 0.9rem;
+            font-weight: 700;
+            background: rgba(212, 253, 87, 0.08);
+        }
 
-    h1 {
-      margin: 0 0 0.6rem;
-      font-size: clamp(1.6rem, 5vw, 2rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.25;
-    }
+        .eyebrow::before {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--lime);
+            box-shadow: 0 0 18px var(--lime);
+            content: "";
+        }
 
-    h1 span {
-      background: linear-gradient(135deg, #c4b5fd, #99f6e4);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+        h1 {
+            margin: 0;
+            font-size: clamp(3.1rem, 10vw, 7.6rem);
+            line-height: 0.92;
+            letter-spacing: -0.08em;
+        }
 
-    .lead {
-      margin: 0 0 1.75rem;
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-    }
+        .hero-copy {
+            max-width: 640px;
+            margin: 24px 0 0;
+            color: rgba(255, 255, 255, 0.76);
+            font-size: clamp(1rem, 2.2vw, 1.22rem);
+        }
 
-    .stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
+        .ruby-title {
+            margin: 30px 0 0;
+            color: var(--lime-soft);
+            font-size: clamp(2.2rem, 6vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -0.06em;
+            line-height: 1.05;
+        }
 
-    .stat {
-      padding: 0.9rem 0.65rem;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-    }
+        .ruby-title rt {
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 0.28em;
+            letter-spacing: 0.04em;
+        }
 
-    .stat-value {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--accent);
-      font-variant-numeric: tabular-nums;
-    }
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 36px;
+        }
 
-    .stat-label {
-      margin-top: 0.25rem;
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 52px;
+            padding: 0 22px;
+            border: 0;
+            border-radius: 999px;
+            font: inherit;
+            font-weight: 900;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+        }
 
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.65rem;
-      justify-content: center;
-    }
+        .button-primary {
+            color: #11170d;
+            background: linear-gradient(135deg, var(--lime), var(--lime-soft));
+            box-shadow: 0 18px 40px rgba(212, 253, 87, 0.24);
+        }
 
-    .btn {
-      cursor: pointer;
-      border: none;
-      padding: 0.75rem 1.35rem;
-      font-family: inherit;
-      font-size: 0.9rem;
-      font-weight: 600;
-      border-radius: 14px;
-      color: var(--text);
-      transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        background 0.18s ease;
-    }
+        .button-secondary {
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.08);
+        }
 
-    .btn:active {
-      transform: scale(0.97);
-    }
+        .button:hover,
+        .button:focus-visible {
+            transform: translateY(-3px);
+        }
 
-    .btn-primary {
-      background: linear-gradient(135deg, rgba(167, 139, 250, 0.35), rgba(52, 211, 153, 0.25));
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
-    }
+        .button:focus-visible,
+        .event-card:focus-visible,
+        .instagram-link:focus-visible {
+            outline: 3px solid var(--lime-soft);
+            outline-offset: 4px;
+        }
 
-    .btn-primary:hover {
-      box-shadow:
-        0 8px 28px rgba(129, 140, 248, 0.35),
-        0 6px 20px rgba(0, 0, 0, 0.2);
-      transform: translateY(-2px);
-    }
+        .poster-card {
+            position: relative;
+            min-height: 520px;
+            padding: 26px;
+            border: 1px solid rgba(212, 253, 87, 0.28);
+            border-radius: var(--radius-lg);
+            background:
+                linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.04)),
+                radial-gradient(circle at 80% 20%, rgba(212, 253, 87, 0.42), transparent 13rem);
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
+            backdrop-filter: blur(22px);
+            overflow: hidden;
+        }
 
-    .btn-ghost {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
+        .poster-card::before {
+            position: absolute;
+            inset: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 26px;
+            content: "";
+        }
 
-    .btn-ghost:hover {
-      background: rgba(255, 255, 255, 0.14);
-      transform: translateY(-2px);
-    }
+        .poster-card::after {
+            position: absolute;
+            right: -54px;
+            bottom: -54px;
+            width: 230px;
+            height: 230px;
+            border: 42px solid rgba(212, 253, 87, 0.16);
+            border-radius: 50%;
+            content: "";
+        }
 
-    .footer-row {
-      margin-top: 1.5rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+        .poster-meta {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-    .toast {
-      position: fixed;
-      bottom: clamp(1rem, 4vw, 2rem);
-      left: 50%;
-      translate: -50% 120%;
-      z-index: 10;
-      padding: 0.65rem 1.2rem;
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--text);
-      opacity: 0;
-      pointer-events: none;
-      transition:
-        translate 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.35s ease;
-    }
+        .meta-chip {
+            padding: 7px 12px;
+            border: 1px solid rgba(212, 253, 87, 0.28);
+            border-radius: 999px;
+            color: var(--lime-pale);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: rgba(0, 0, 0, 0.18);
+        }
 
-    .toast.show {
-      translate: -50% 0;
-      opacity: 1;
-    }
+        .poster-title {
+            position: absolute;
+            left: 28px;
+            right: 28px;
+            bottom: 28px;
+            z-index: 1;
+        }
 
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.001ms !important;
-      }
+        .poster-title strong {
+            display: block;
+            color: var(--lime);
+            font-size: clamp(3rem, 7vw, 5.4rem);
+            line-height: 0.86;
+            letter-spacing: -0.08em;
+        }
 
-      body {
-        background-position: 50% 50%;
-      }
-    }
-  </style>
+        .poster-title span {
+            display: block;
+            margin-top: 18px;
+            color: rgba(255, 255, 255, 0.74);
+            font-weight: 700;
+        }
+
+        main {
+            padding: 0 0 88px;
+        }
+
+        .section {
+            margin-top: 28px;
+        }
+
+        .success-card {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 18px;
+            align-items: center;
+            margin-top: -54px;
+            padding: clamp(24px, 4vw, 34px);
+            border: 1px solid rgba(212, 253, 87, 0.55);
+            border-radius: var(--radius-lg);
+            background: rgba(255, 255, 255, 0.88);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(20px);
+        }
+
+        .success-icon {
+            display: grid;
+            width: 56px;
+            height: 56px;
+            place-items: center;
+            border-radius: 18px;
+            color: var(--dark);
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--lime), var(--lime-soft));
+            box-shadow: 0 14px 34px rgba(212, 253, 87, 0.28);
+        }
+
+        .label {
+            margin: 0 0 6px;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .success-card h2,
+        .section-heading h2 {
+            margin: 0;
+            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            line-height: 1.15;
+            letter-spacing: -0.04em;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            align-items: end;
+            margin: 86px 0 24px;
+        }
+
+        .section-heading p {
+            max-width: 440px;
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 18px;
+        }
+
+        .event-card {
+            position: relative;
+            min-height: 220px;
+            padding: 26px;
+            border: 1px solid rgba(24, 32, 18, 0.08);
+            border-radius: var(--radius-lg);
+            color: var(--text);
+            text-decoration: none;
+            background:
+                linear-gradient(135deg, rgba(241, 255, 194, 0.84), rgba(255, 255, 255, 0.92)),
+                radial-gradient(circle at top right, rgba(212, 253, 87, 0.56), transparent 12rem);
+            box-shadow: 0 18px 48px rgba(20, 30, 12, 0.1);
+            overflow: hidden;
+            transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+        }
+
+        .event-card:first-child {
+            min-height: 300px;
+        }
+
+        .event-card:nth-child(3) {
+            grid-column: 1 / -1;
+            min-height: 180px;
+        }
+
+        .event-card:hover {
+            border-color: rgba(212, 253, 87, 0.9);
+            box-shadow: 0 26px 70px rgba(20, 30, 12, 0.16);
+            transform: translateY(-6px);
+        }
+
+        .event-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            margin-bottom: 28px;
+            border-radius: 15px;
+            color: var(--dark);
+            font-weight: 900;
+            background: var(--lime);
+        }
+
+        .event-card h3 {
+            margin: 0;
+            font-size: clamp(1.7rem, 4vw, 3rem);
+            line-height: 1.05;
+            letter-spacing: -0.05em;
+        }
+
+        .event-card p {
+            max-width: 420px;
+            margin: 14px 0 0;
+            color: var(--muted);
+        }
+
+        .event-arrow {
+            position: absolute;
+            right: 24px;
+            bottom: 24px;
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+
+        .detail-list {
+            display: grid;
+            gap: 24px;
+        }
+
+        .detail-card {
+            display: grid;
+            grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.1fr);
+            gap: 28px;
+            align-items: center;
+            padding: clamp(18px, 3vw, 28px);
+            border: 1px solid rgba(24, 32, 18, 0.08);
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .image-placeholder {
+            position: relative;
+            min-height: 300px;
+            border: 1px solid rgba(212, 253, 87, 0.8);
+            border-radius: var(--radius-md);
+            background:
+                radial-gradient(circle at 22px 22px, rgba(212, 253, 87, 0.55) 2px, transparent 3px) 0 0 / 26px 26px,
+                linear-gradient(135deg, #182012, #263616);
+            overflow: hidden;
+        }
+
+        .image-placeholder::after {
+            position: absolute;
+            inset: 18px;
+            display: grid;
+            place-items: center;
+            border: 1px dashed rgba(228, 255, 138, 0.68);
+            border-radius: 20px;
+            color: var(--lime-pale);
+            content: attr(data-label);
+            font-size: 1.15rem;
+            font-weight: 900;
+            letter-spacing: 0.02em;
+            text-align: center;
+        }
+
+        .detail-content h3 {
+            margin: 0 0 10px;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            line-height: 1.05;
+            letter-spacing: -0.05em;
+        }
+
+        .detail-content p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .notice-list {
+            display: grid;
+            gap: 10px;
+            margin: 22px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .notice-list li {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            color: #354128;
+        }
+
+        .notice-list li::before {
+            flex: 0 0 auto;
+            width: 8px;
+            height: 8px;
+            margin-top: 0.55em;
+            border-radius: 50%;
+            background: var(--lime);
+            box-shadow: 0 0 0 5px rgba(212, 253, 87, 0.16);
+            content: "";
+        }
+
+        .coming-soon {
+            display: grid;
+            min-height: 260px;
+            place-items: center;
+            border: 1px solid rgba(212, 253, 87, 0.46);
+            border-radius: var(--radius-md);
+            background:
+                linear-gradient(135deg, rgba(241, 255, 194, 0.88), rgba(255, 255, 255, 0.92)),
+                radial-gradient(circle at top right, rgba(212, 253, 87, 0.48), transparent 11rem);
+            text-align: center;
+        }
+
+        .coming-soon strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: clamp(2rem, 6vw, 4.2rem);
+            line-height: 1;
+            letter-spacing: -0.06em;
+        }
+
+        .footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            margin-top: 74px;
+            padding: 54px 20px;
+            border-radius: var(--radius-lg);
+            color: rgba(255, 255, 255, 0.78);
+            background:
+                radial-gradient(circle at 50% 0%, rgba(212, 253, 87, 0.24), transparent 16rem),
+                linear-gradient(135deg, var(--dark), var(--dark-2));
+            text-align: center;
+        }
+
+        .instagram-link {
+            display: inline-grid;
+            width: 70px;
+            height: 70px;
+            place-items: center;
+            border-radius: 24px;
+            color: #11170d;
+            font-size: 1.85rem;
+            font-weight: 900;
+            text-decoration: none;
+            background:
+                radial-gradient(circle at 30% 25%, #ffffff 0 8%, transparent 9%),
+                linear-gradient(135deg, var(--lime), var(--lime-soft));
+            box-shadow: 0 22px 54px rgba(212, 253, 87, 0.2);
+            transition: transform 180ms ease, box-shadow 180ms ease;
+        }
+
+        .instagram-link:hover {
+            transform: translateY(-4px) rotate(-2deg);
+            box-shadow: 0 26px 64px rgba(212, 253, 87, 0.28);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 520ms ease, transform 520ms ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 860px) {
+            body {
+                background:
+                    radial-gradient(circle at top left, rgba(212, 253, 87, 0.34), transparent 24rem),
+                    linear-gradient(180deg, #11170d 0%, #182012 49rem, var(--surface) 49rem);
+            }
+
+            .hero {
+                min-height: auto;
+                padding-bottom: 84px;
+            }
+
+            .topbar {
+                margin-bottom: 52px;
+            }
+
+            .hero-grid,
+            .detail-card {
+                grid-template-columns: 1fr;
+            }
+
+            .poster-card {
+                min-height: 390px;
+            }
+
+            .success-card {
+                grid-template-columns: 1fr;
+                margin-top: -42px;
+            }
+
+            .section-heading {
+                display: block;
+            }
+
+            .section-heading p {
+                margin-top: 12px;
+            }
+
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .event-card:nth-child(3) {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .page {
+                width: min(100% - 22px, 1120px);
+            }
+
+            .topbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .hero-actions {
+                display: grid;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .success-card,
+            .detail-card,
+            .event-card {
+                border-radius: 24px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.001ms !important;
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="orbits" aria-hidden="true">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
+    <header class="hero">
+        <div class="page">
+            <nav class="topbar" aria-label="페이지 상단">
+                <div class="brand" aria-label="Aooo fan event">
+                    <span class="brand-mark" aria-hidden="true"></span>
+                    Aooo Fan Event
+                </div>
+                <a class="nav-pill" href="#events">이벤트 소개</a>
+            </nav>
 
-  <div class="wrap">
-    <main class="glass card">
-      <div class="badge">
-        <span class="badge-dot" aria-hidden="true"></span>
-        이벤트 테스트
-      </div>
-      <h1>AOOO <span>2606</span></h1>
-      <p class="lead">
-        글래스모피즘 카드 위에서 버튼을 눌러 보세요. 배경 블러와 반투명 레이어로 깔끔한 테스트용 화면을 구성했습니다.
-      </p>
+            <div class="hero-grid">
+                <div>
+                    <p class="eyebrow">Aooo first one-man live in Korea</p>
+                    <h1>Aooo 첫 원맨 내한 이벤트</h1>
+                    <p class="ruby-title" lang="ja">
+                        韓国でまた<ruby>会<rt>A</rt></ruby><ruby>お<rt>o</rt></ruby><ruby>う<rt>oo</rt></ruby>
+                    </p>
+                    <p class="hero-copy">
+                        공연장에서 함께 완성하는 팬 이벤트 안내 페이지입니다. 아래에서 슬로건 배부, 현수막 메시지, 추후 공개 이벤트를 확인해 주세요.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="https://kashiasobi.github.io/event/aooo2606_callandresponse" target="_blank" rel="noopener noreferrer">
+                            콜 가이드 보기
+                            <span aria-hidden="true">↗</span>
+                        </a>
+                        <a class="button button-secondary" href="#event-1">이벤트 확인하기</a>
+                    </div>
+                </div>
 
-      <div class="stats" aria-live="polite">
-        <div class="stat">
-          <div class="stat-value" id="count">0</div>
-          <div class="stat-label">티크 (+1 버튼)</div>
+                <aside class="poster-card" aria-label="이벤트 포스터 장식">
+                    <div class="poster-meta">
+                        <span class="meta-chip">Aooo in Korea</span>
+                        <span class="meta-chip">Fan Event</span>
+                        <span class="meta-chip">2026</span>
+                    </div>
+                    <div class="poster-title">
+                        <strong>Aooo</strong>
+                        <span>See you again in Korea</span>
+                    </div>
+                </aside>
+            </div>
         </div>
-        <div class="stat">
-          <div class="stat-value" id="visitsLabel">로드됨</div>
-          <div class="stat-label">방문 표시</div>
-        </div>
-      </div>
+    </header>
 
-      <div class="actions">
-        <button type="button" class="btn btn-primary" id="increment">카운터 +1</button>
-        <button type="button" class="btn btn-ghost" id="reset">리셋</button>
-      </div>
+    <main class="page">
+        <section class="success-card reveal" aria-labelledby="success-title">
+            <div class="success-icon" aria-hidden="true">✓</div>
+            <div>
+                <p class="label">Goal achieved</p>
+                <h2 id="success-title">여러분의 큰 관심과 성원에 힘입어 목표 모금액을 달성했습니다. 감사합니다.</h2>
+            </div>
+        </section>
 
-      <div class="footer-row">
-        <span id="datetime">날짜 로딩중…</span>
-        <span>HTML · CSS · JS</span>
-      </div>
+        <section class="section reveal" id="events" aria-labelledby="events-title">
+            <div class="section-heading">
+                <div>
+                    <p class="label">Event line-up</p>
+                    <h2 id="events-title">이벤트 소개</h2>
+                </div>
+                <p>각 카드를 누르면 해당 이벤트 안내로 이동합니다. 상세 안내는 준비 상황에 맞춰 순차적으로 업데이트됩니다.</p>
+            </div>
+
+            <div class="event-grid">
+                <a class="event-card" href="#event-1">
+                    <span class="event-number">01</span>
+                    <h3>슬로건 배부</h3>
+                    <p>공연장에서 함께 들어 올릴 슬로건 배부 안내입니다.</p>
+                    <span class="event-arrow" aria-hidden="true">↓</span>
+                </a>
+
+                <a class="event-card" href="#event-2">
+                    <span class="event-number">02</span>
+                    <h3>현수막 메시지</h3>
+                    <p>Aooo에게 전할 마음을 담은 메시지 이벤트입니다.</p>
+                    <span class="event-arrow" aria-hidden="true">↓</span>
+                </a>
+
+                <a class="event-card" href="#event-3">
+                    <span class="event-number">03</span>
+                    <h3>블??? 상??</h3>
+                    <p>세 번째 이벤트는 추후 공개 예정입니다. 조금만 기다려 주세요.</p>
+                    <span class="event-arrow" aria-hidden="true">↓</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="section reveal" aria-labelledby="details-title">
+            <div class="section-heading">
+                <div>
+                    <p class="label">Details</p>
+                    <h2 id="details-title">상세 안내</h2>
+                </div>
+                <p>이미지와 구체적인 안내사항은 확정 후 교체할 수 있도록 플레이스홀더로 구성했습니다.</p>
+            </div>
+
+            <div class="detail-list">
+                <article class="detail-card" id="event-1">
+                    <div class="image-placeholder" data-label="슬로건 이미지 준비 중"></div>
+                    <div class="detail-content">
+                        <p class="label">Event 01</p>
+                        <h3>슬로건 배부</h3>
+                        <p>공연 당일 팬 여러분과 함께 사용할 슬로건을 배부할 예정입니다. 배부 위치와 시간은 추후 안내됩니다.</p>
+                        <ul class="notice-list">
+                            <li>안내사항, 주의사항 등을 이 영역에 작성할 수 있습니다.</li>
+                            <li>배부 수량, 배부 시간, 수령 조건이 정해지면 이 문구를 교체해 주세요.</li>
+                            <li>현장 상황에 따라 운영 방식이 변경될 수 있습니다.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="detail-card" id="event-2">
+                    <div class="image-placeholder" data-label="현수막 이미지 준비 중"></div>
+                    <div class="detail-content">
+                        <p class="label">Event 02</p>
+                        <h3>현수막 메시지</h3>
+                        <p>Aooo에게 전하고 싶은 마음을 담은 현수막 메시지 이벤트입니다. 최종 문구와 디자인은 확정 후 공개됩니다.</p>
+                        <ul class="notice-list">
+                            <li>안내사항, 주의사항 등을 이 영역에 작성할 수 있습니다.</li>
+                            <li>메시지 공개 방식과 현장 운영 안내가 정해지면 이 문구를 교체해 주세요.</li>
+                            <li>공연장 규정에 맞춰 안전하게 진행될 예정입니다.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="detail-card" id="event-3">
+                    <div class="coming-soon">
+                        <div>
+                            <strong>Coming Soon</strong>
+                            <span>세 번째 이벤트는 추후 공개 예정입니다.</span>
+                        </div>
+                    </div>
+                    <div class="detail-content">
+                        <p class="label">Event 03</p>
+                        <h3>블??? 상??</h3>
+                        <p>아직 공개 전인 이벤트입니다. 공개 가능한 시점에 이 영역에서 상세 내용을 안내하겠습니다.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <a id="instagramLink" class="instagram-link" href="#instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram 새 창으로 열기">◎</a>
+            <div>
+                <strong>Instagram에서 최신 소식을 확인해 주세요.</strong>
+                <br>
+                실제 Instagram URL은 HTML 하단의 <code>INSTAGRAM_URL</code> 값을 교체하면 됩니다.
+            </div>
+        </footer>
     </main>
-  </div>
 
-  <div id="toast" class="glass toast" role="status"></div>
+    <script>
+        const INSTAGRAM_URL = "#instagram";
 
-  <script>
-    (function () {
-      var countEl = document.getElementById('count');
-      var visitsEl = document.getElementById('visitsLabel');
-      var datetimeEl = document.getElementById('datetime');
-      var toast = document.getElementById('toast');
-      var n = 0;
+        document.getElementById("instagramLink").href = INSTAGRAM_URL;
 
-      try {
-        var key = 'aooo2606-v';
-        var v = parseInt(localStorage.getItem(key) || '0', 10) || 0;
-        v++;
-        localStorage.setItem(key, String(v));
-        visitsEl.textContent = String(v) + '회';
-      } catch (e) {
-        visitsEl.textContent = '—';
-      }
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener("click", (event) => {
+                const targetId = anchor.getAttribute("href");
+                if (!targetId || targetId === "#instagram") {
+                    return;
+                }
 
-      function showToast(text) {
-        toast.textContent = text;
-        toast.classList.add('show');
-        clearTimeout(showToast._t);
-        showToast._t = setTimeout(function () {
-          toast.classList.remove('show');
-        }, 2200);
-      }
+                const target = document.querySelector(targetId);
+                if (!target) {
+                    return;
+                }
 
-      document.getElementById('increment').addEventListener('click', function () {
-        n++;
-        countEl.textContent = String(n);
-        showToast('+1 했습니다');
-      });
-
-      document.getElementById('reset').addEventListener('click', function () {
-        if (n === 0) {
-          showToast('이미 0입니다');
-          return;
-        }
-        n = 0;
-        countEl.textContent = '0';
-        showToast('카운터를 초기화했습니다');
-      });
-
-      function tickClock() {
-        var d = new Date();
-        datetimeEl.textContent = d.toLocaleString('ko-KR', {
-          dateStyle: 'medium',
-          timeStyle: 'short',
+                event.preventDefault();
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
         });
-      }
-      tickClock();
-      setInterval(tickClock, 1000);
-    })();
-  </script>
+
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (!prefersReducedMotion && "IntersectionObserver" in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.16 });
+
+            document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+        } else {
+            document.querySelectorAll(".reveal").forEach((element) => element.classList.add("is-visible"));
+        }
+    </script>
 </body>
 </html>
