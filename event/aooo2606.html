@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aooo 2606 — 테스트 페이지</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --glass-bg: rgba(255, 255, 255, 0.12);
+      --glass-border: rgba(255, 255, 255, 0.28);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      --text: #f8fafc;
+      --text-muted: rgba(248, 250, 252, 0.72);
+      --accent: #a78bfa;
+      --accent-2: #34d399;
+      --orbit-speed: 24s;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family:
+        'Noto Sans KR',
+        -apple-system,
+        BlinkMacSystemFont,
+        system-ui,
+        sans-serif;
+      color: var(--text);
+      background: linear-gradient(
+        145deg,
+        #0f172a 0%,
+        #1e1b4b 35%,
+        #312e81 55%,
+        #134e4a 80%,
+        #0f172a 100%
+      );
+      background-size: 200% 200%;
+      animation: bgShift 18s ease-in-out infinite;
+      overflow-x: hidden;
+    }
+
+    @keyframes bgShift {
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .orbits {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.45;
+      animation: drift var(--dur) ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: min(60vw, 420px);
+      height: min(60vw, 420px);
+      background: radial-gradient(circle, #818cf8 0%, transparent 70%);
+      top: -10%;
+      left: -15%;
+      --dur: 14s;
+    }
+
+    .orb-2 {
+      width: min(55vw, 380px);
+      height: min(55vw, 380px);
+      background: radial-gradient(circle, #2dd4bf 0%, transparent 70%);
+      bottom: -5%;
+      right: -12%;
+      --dur: 18s;
+    }
+
+    .orb-3 {
+      width: min(40vw, 280px);
+      height: min(40vw, 280px);
+      background: radial-gradient(circle, #f472b6 0%, transparent 70%);
+      top: 40%;
+      left: 35%;
+      --dur: 12s;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate(0, 0) scale(1);
+      }
+      to {
+        transform: translate(30px, -40px) scale(1.05);
+      }
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1.25rem, 4vw, 3rem);
+    }
+
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow:
+        var(--glass-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    .card {
+      width: min(100%, 420px);
+      padding: clamp(1.75rem, 5vw, 2.25rem);
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.85rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      background: rgba(52, 211, 153, 0.15);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      border-radius: 999px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 10px var(--accent-2);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+      }
+    }
+
+    h1 {
+      margin: 0 0 0.6rem;
+      font-size: clamp(1.6rem, 5vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, #c4b5fd, #99f6e4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      margin: 0 0 1.75rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat {
+      padding: 0.9rem 0.65rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .stat-value {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-label {
+      margin-top: 0.25rem;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      justify-content: center;
+    }
+
+    .btn {
+      cursor: pointer;
+      border: none;
+      padding: 0.75rem 1.35rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 14px;
+      color: var(--text);
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.35), rgba(52, 211, 153, 0.25));
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    }
+
+    .btn-primary:hover {
+      box-shadow:
+        0 8px 28px rgba(129, 140, 248, 0.35),
+        0 6px 20px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-2px);
+    }
+
+    .footer-row {
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: clamp(1rem, 4vw, 2rem);
+      left: 50%;
+      translate: -50% 120%;
+      z-index: 10;
+      padding: 0.65rem 1.2rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text);
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        translate 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.35s ease;
+    }
+
+    .toast.show {
+      translate: -50% 0;
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      body {
+        background-position: 50% 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="orbits" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="wrap">
+    <main class="glass card">
+      <div class="badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        이벤트 테스트
+      </div>
+      <h1>AOOO <span>2606</span></h1>
+      <p class="lead">
+        글래스모피즘 카드 위에서 버튼을 눌러 보세요. 배경 블러와 반투명 레이어로 깔끔한 테스트용 화면을 구성했습니다.
+      </p>
+
+      <div class="stats" aria-live="polite">
+        <div class="stat">
+          <div class="stat-value" id="count">0</div>
+          <div class="stat-label">티크 (+1 버튼)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="visitsLabel">로드됨</div>
+          <div class="stat-label">방문 표시</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="increment">카운터 +1</button>
+        <button type="button" class="btn btn-ghost" id="reset">리셋</button>
+      </div>
+
+      <div class="footer-row">
+        <span id="datetime">날짜 로딩중…</span>
+        <span>HTML · CSS · JS</span>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="glass toast" role="status"></div>
+
+  <script>
+    (function () {
+      var countEl = document.getElementById('count');
+      var visitsEl = document.getElementById('visitsLabel');
+      var datetimeEl = document.getElementById('datetime');
+      var toast = document.getElementById('toast');
+      var n = 0;
+
+      try {
+        var key = 'aooo2606-v';
+        var v = parseInt(localStorage.getItem(key) || '0', 10) || 0;
+        v++;
+        localStorage.setItem(key, String(v));
+        visitsEl.textContent = String(v) + '회';
+      } catch (e) {
+        visitsEl.textContent = '—';
+      }
+
+      function showToast(text) {
+        toast.textContent = text;
+        toast.classList.add('show');
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(function () {
+          toast.classList.remove('show');
+        }, 2200);
+      }
+
+      document.getElementById('increment').addEventListener('click', function () {
+        n++;
+        countEl.textContent = String(n);
+        showToast('+1 했습니다');
+      });
+
+      document.getElementById('reset').addEventListener('click', function () {
+        if (n === 0) {
+          showToast('이미 0입니다');
+          return;
+        }
+        n = 0;
+        countEl.textContent = '0';
+        showToast('카운터를 초기화했습니다');
+      });
+
+      function tickClock() {
+        var d = new Date();
+        datetimeEl.textContent = d.toLocaleString('ko-KR', {
+          dateStyle: 'medium',
+          timeStyle: 'short',
+        });
+      }
+      tickClock();
+      setInterval(tickClock, 1000);
+    })();
+  </script>
+</body>
+</html>
