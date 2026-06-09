@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aooo 첫 원맨 내한 공연 콜 & 리스폰스 가이드 — 곡별 콜 타이밍과 발음을 확인하세요.">
+    <title>Aooo 콜 가이드</title>
+    <style>
+        :root {
+            --lime: #d4fd57;
+            --lime-soft: #e4ff8a;
+            --lime-pale: #f1ffc2;
+            --dark: #10140d;
+            --dark-2: #182012;
+            --surface: #fbfff2;
+            --white: #ffffff;
+            --text: #182012;
+            --muted: #536044;
+            --line: rgba(212, 253, 87, 0.32);
+            --shadow: 0 24px 70px rgba(20, 30, 12, 0.16);
+            --radius-lg: 34px;
+            --radius-md: 24px;
+            --radius-sm: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(212, 253, 87, 0.34), transparent 34rem),
+                linear-gradient(180deg, #11170d 0%, #182012 42rem, var(--surface) 42rem);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            position: fixed;
+            z-index: -1;
+            width: 28rem;
+            height: 28rem;
+            border-radius: 999px;
+            content: "";
+            filter: blur(28px);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        body::before {
+            top: -8rem;
+            right: -6rem;
+            background: rgba(212, 253, 87, 0.36);
+        }
+
+        body::after {
+            bottom: 10rem;
+            left: -12rem;
+            background: rgba(228, 255, 138, 0.42);
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .page {
+            width: min(900px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        /* ── Header ── */
+
+        .site-header {
+            padding: 36px 0 0;
+            color: var(--white);
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 64px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--lime), var(--lime-soft));
+            box-shadow: 0 0 34px rgba(212, 253, 87, 0.38);
+            flex-shrink: 0;
+        }
+
+        .nav-pill {
+            padding: 10px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 999px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            text-decoration: none;
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.07);
+            transition: transform 180ms ease, border-color 180ms ease, color 180ms ease;
+            white-space: nowrap;
+        }
+
+        .nav-pill:hover,
+        .nav-pill:focus-visible {
+            color: var(--white);
+            border-color: rgba(212, 253, 87, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .hero-text {
+            padding-bottom: 72px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: fit-content;
+            margin: 0 0 20px;
+            padding: 8px 14px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--lime-pale);
+            font-size: 0.9rem;
+            font-weight: 700;
+            background: rgba(212, 253, 87, 0.08);
+        }
+
+        .eyebrow::before {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--lime);
+            box-shadow: 0 0 18px var(--lime);
+            content: "";
+            flex-shrink: 0;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2.8rem, 9vw, 5.8rem);
+            line-height: 0.96;
+            letter-spacing: -0.06em;
+            color: var(--white);
+        }
+
+        .hero-copy {
+            max-width: 600px;
+            margin: 22px 0 0;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+        }
+
+        /* ── Accordion ── */
+
+        .accordion-section {
+            padding: 0 0 100px;
+        }
+
+        .section-label {
+            margin: 0 0 28px;
+            color: var(--muted);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .accordion-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        details.song-item {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            transition: border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+        }
+
+        details.song-item[open] {
+            border-color: rgba(212, 253, 87, 0.38);
+            box-shadow: 0 0 0 1px rgba(212, 253, 87, 0.1), 0 20px 60px rgba(0, 0, 0, 0.28);
+            background: rgba(212, 253, 87, 0.03);
+        }
+
+        summary.song-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 18px 22px;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+            transition: background 180ms ease;
+            outline: none;
+        }
+
+        summary.song-header::-webkit-details-marker {
+            display: none;
+        }
+
+        summary.song-header:hover {
+            background: rgba(212, 253, 87, 0.05);
+        }
+
+        summary.song-header:focus-visible {
+            outline: 2px solid rgba(212, 253, 87, 0.6);
+            outline-offset: -2px;
+        }
+
+        details[open] > summary.song-header {
+            border-bottom: 1px solid rgba(212, 253, 87, 0.16);
+        }
+
+        .song-num {
+            min-width: 34px;
+            height: 34px;
+            display: inline-grid;
+            place-items: center;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 253, 87, 0.22);
+            color: var(--lime-soft);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            background: rgba(212, 253, 87, 0.06);
+            flex-shrink: 0;
+            transition: background 220ms ease, color 220ms ease, border-color 220ms ease;
+        }
+
+        details[open] .song-num {
+            background: linear-gradient(135deg, var(--lime), var(--lime-soft));
+            color: #11170d;
+            border-color: transparent;
+        }
+
+        .song-titles {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .song-title-jp {
+            display: block;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .song-title-kr {
+            display: block;
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.48);
+            margin-top: 1px;
+        }
+
+        .song-chevron {
+            width: 28px;
+            height: 28px;
+            display: inline-grid;
+            place-items: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            flex-shrink: 0;
+            transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1), background 180ms ease, color 180ms ease;
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        details[open] .song-chevron {
+            transform: rotate(180deg);
+            background: rgba(212, 253, 87, 0.14);
+            color: var(--lime-soft);
+        }
+
+        .song-image-wrap {
+            padding: 20px 22px 24px;
+            animation: revealContent 280ms ease both;
+        }
+
+        @keyframes revealContent {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .song-image-wrap img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+        }
+
+        /* ── Footer ── */
+
+        .footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            padding: 54px 20px;
+            border-radius: var(--radius-lg);
+            color: rgba(255, 255, 255, 0.72);
+            background:
+                radial-gradient(circle at 50% 0%, rgba(212, 253, 87, 0.24), transparent 16rem),
+                linear-gradient(135deg, var(--dark), var(--dark-2));
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .footer a {
+            color: var(--lime-soft);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: color 180ms ease;
+        }
+
+        .footer a:hover {
+            color: var(--lime-pale);
+        }
+
+        /* ── Responsive ── */
+
+        @media (max-width: 600px) {
+            .topbar {
+                margin-bottom: 48px;
+            }
+
+            summary.song-header {
+                padding: 16px 16px;
+                gap: 14px;
+            }
+
+            .song-image-wrap {
+                padding: 14px 16px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <header class="site-header">
+            <div class="topbar">
+                <a href="aooo2606.html" class="brand">
+                    <div class="brand-mark"></div>
+                    Aooo Fan Event
+                </a>
+                <a href="aooo2606.html" class="nav-pill">← 이벤트 안내로</a>
+            </div>
+            <div class="hero-text">
+                <p class="eyebrow">Call &amp; Response Guide</p>
+                <h1>Aooo<br>콜 가이드</h1>
+                <p class="hero-copy">공연에서 함께 즐길 수 있도록 곡별 콜 & 리스폰스 가이드를 정리했습니다. 곡 제목을 눌러서 이미지를 확인하세요.</p>
+            </div>
+        </header>
+
+        <section class="accordion-section">
+            <p class="section-label">18 Songs</p>
+            <div class="accordion-list">
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">01</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">イエロートイ</span>
+                            <span class="song-title-kr">옐로 토이</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C1.JPG" alt="イエロートイ 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">02</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">FLASH FORWARD</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C2.JPG" alt="FLASH FORWARD 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">03</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">水中小女</span>
+                            <span class="song-title-kr">수중소녀</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C3.JPG" alt="水中小女 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">04</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">アパシー</span>
+                            <span class="song-title-kr">무감정</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C4.JPG" alt="アパシー 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">05</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">サラダボウル</span>
+                            <span class="song-title-kr">샐러드 볼</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C5.JPG" alt="サラダボウル 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">06</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">フラジャイル・ナイト</span>
+                            <span class="song-title-kr">프래자일 나이트</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C6.JPG" alt="フラジャイル・ナイト 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">07</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">BAQN</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C7.JPG" alt="BAQN 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">08</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">CRAZZZY</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C8.JPG" alt="CRAZZZY 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">09</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">CALL</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C9.JPG" alt="CALL 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">10</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">Geeek</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C10.JPG" alt="Geeek 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">11</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">クエスチョン</span>
+                            <span class="song-title-kr">퀘스천</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C11.JPG" alt="クエスチョン 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">12</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">魔法はスパイス</span>
+                            <span class="song-title-kr">마법은 스파이스</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C12.JPG" alt="魔法はスパイス 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">13</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">スターサイン</span>
+                            <span class="song-title-kr">스타 사인</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C13.JPG" alt="スターサイン 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">14</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">ネオワビシイ</span>
+                            <span class="song-title-kr">네오 와비시이</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C14.JPG" alt="ネオワビシイ 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">15</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">リピート</span>
+                            <span class="song-title-kr">리피트</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C15.JPG" alt="リピート 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">16</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">青い煙</span>
+                            <span class="song-title-kr">푸른 연기</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C16.JPG" alt="青い煙 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">17</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">YANKEEE</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C17.JPG" alt="YANKEEE 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+                <details class="song-item">
+                    <summary class="song-header">
+                        <span class="song-num">18</span>
+                        <span class="song-titles">
+                            <span class="song-title-jp">MORE</span>
+                        </span>
+                        <span class="song-chevron" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </summary>
+                    <div class="song-image-wrap">
+                        <img src="aooo%EC%BD%9C%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C18.JPG" alt="MORE 콜 가이드" loading="lazy">
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p style="margin:0">Aooo 첫 원맨 내한 공연 팬 이벤트</p>
+            <a href="aooo2606.html">← 이벤트 안내로 돌아가기</a>
+        </footer>
+    </main>
+</body>
+</html>
