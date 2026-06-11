@@ -199,18 +199,17 @@
         }
 
         details.song-item {
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(212, 253, 87, 0.16);
             border-radius: var(--radius-md);
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(10px);
+            background: rgba(16, 20, 13, 0.88);
             overflow: hidden;
             transition: border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
         }
 
         details.song-item[open] {
-            border-color: rgba(212, 253, 87, 0.38);
-            box-shadow: 0 0 0 1px rgba(212, 253, 87, 0.1), 0 20px 60px rgba(0, 0, 0, 0.28);
-            background: rgba(212, 253, 87, 0.03);
+            border-color: rgba(212, 253, 87, 0.42);
+            box-shadow: 0 0 0 1px rgba(212, 253, 87, 0.1), 0 20px 60px rgba(0, 0, 0, 0.32);
+            background: rgba(22, 30, 14, 0.92);
         }
 
         summary.song-header {
@@ -289,10 +288,10 @@
             display: inline-grid;
             place-items: center;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.1);
             flex-shrink: 0;
             transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1), background 180ms ease, color 180ms ease;
-            color: rgba(255, 255, 255, 0.45);
+            color: rgba(255, 255, 255, 0.55);
         }
 
         details[open] .song-chevron {
